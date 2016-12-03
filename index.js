@@ -9,7 +9,7 @@ app.on('ready', function(){
 	createMainMenu();
 
 	let win = new BrowserWindow({
-		width: 900, height: 700, minWidth: 300, minHeight: 400,
+		width: 900, height: 700, minWidth: 550, minHeight: 400,
 		frame: false, titleBarStyle: 'hidden'})
 
 	win.loadURL('file:///'+__dirname+'/index.html')

@@ -30,7 +30,7 @@
 			border-bottom: 1px solid #ddd; max-height: 52px; height: 52px; overflow: hidden;
 			background: #f9f9f9;
 		}
-		ul { margin:0; padding:0; }
+		ul { margin:0 auto 0 auto; padding:0; }
 		.app-header ul.nav li { padding:3px 12px 0px 12px; margin: 0 5px 1px 5px; border-radius: 5px; }
 		.app-header ul.nav li:hover { background: #eee; cursor: pointer; }
 		.app-header ul.nav li.active { background: #e7e7e7; }
@@ -40,9 +40,9 @@
 
 		webview { width:100%; height:100%; }
 		#webviews { width:100%; height: calc(100vh - 52px); }
-		#webviews > div { display:none; height:100%; }
+		#webviews > div { opacity: 0; z-index:1; position: absolute; width:100%; height:calc(100vh - 52px); }
 
-		@media only screen and (max-width: 831px) {
+		@media only screen and (max-width: 885px) {
 			.app-header li span.service { display: none; }
 		}
 	</style>
@@ -50,8 +50,9 @@
   </head>
   <body>
 <div class="app-header">
+	<div style="margin:0 auto 0 auto; display: -webkit-box">
 	<ul class="nav" id="tabs">
-		<div style="float:left;"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; </div>
+		<div style="float:left;"> &nbsp; &nbsp; &nbsp; &nbsp; </div>
   		<li service="messenger" onclick="tab(1)" role="presentation" class="active">
 			<span class="number">1</span>
 			<img src="icons/messenger.png" />
@@ -82,12 +83,12 @@
 			<img src="icons/hangouts.png" />
 			<span class="service">Hangouts</span>
 		</li>
-
 	</ul>
+	</div>
 </div>
 
 <div id="webviews">
-	<div id="messenger" style="display:block;">
+	<div id="messenger" autosize="on" style="opacity:1; z-index:999;">
 		<webview src="https://messenger.com"></webview>
 	</div>
 	<div id="steam">
@@ -127,9 +128,11 @@
 			console.log(webviews[i].getAttribute("id"))
 			n++;
 			if(n==service){
-				webviews[i].style.display = "block";
+				webviews[i].style.opacity = "1";
+				webviews[i].style.zIndex = "999";
 			}else{
-				webviews[i].style.display = "none";
+				webviews[i].style.opacity = "0";
+				webviews[i].style.zIndex = "1";
 			}
 		}
 	}
